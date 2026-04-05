@@ -1,4 +1,33 @@
 /* ============================================================
+   RELEASE STATUS CONFIG
+   Update the status here to reflect the current release stage.
+   Possible values: 'internal-testing' | 'closed-beta' | 'open-beta' | 'production'
+   ============================================================ */
+const RELEASE_STATUS = {
+  'self-improvement': 'internal-testing'
+};
+
+const RELEASE_STATUS_META = {
+  'internal-testing': { label: 'Internal Testing', color: '#f59e0b' },
+  'closed-beta':      { label: 'Closed Beta',      color: '#06b6d4' },
+  'open-beta':        { label: 'Open Beta',         color: '#a855f7' },
+  'production':       { label: 'Live on Play Store', color: '#22c55e' }
+};
+
+(function applyReleaseBadges() {
+  Object.entries(RELEASE_STATUS).forEach(([id, status]) => {
+    const el = document.getElementById('release-status-' + id);
+    if (!el) return;
+    const meta = RELEASE_STATUS_META[status];
+    if (!meta) return;
+    el.textContent = meta.label;
+    el.style.color = meta.color;
+    el.style.borderColor = meta.color + '55';
+    el.style.background = meta.color + '18';
+  });
+})();
+
+/* ============================================================
    CUSTOM CURSOR
    ============================================================ */
 const cursor    = document.getElementById('cursor');
